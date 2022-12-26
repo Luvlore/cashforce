@@ -2,7 +2,6 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('orders', 
   [
     {
-      id: 1,
       orderNfId: '1605181324132',
       orderNumber: '18153',
       orderPath: null,

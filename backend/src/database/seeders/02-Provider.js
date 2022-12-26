@@ -2,7 +2,6 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('providers', 
     [
       {
-        id: 1,
         name: 'CEDENTE 002',
         tradingName: 'CEDENTE 002 LTDA',
         cashforceTax: null,
