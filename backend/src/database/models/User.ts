@@ -1,7 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
-import type { Order, OrderId } from './Order';
 
 export interface UserAttributes {
   id: number;
@@ -34,18 +33,6 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   createdAt!: Date;
   updatedAt!: Date;
   cashforceAdm?: number;
-
-  orders!: Order[];
-  getOrders!: Sequelize.HasManyGetAssociationsMixin<Order>;
-  setOrders!: Sequelize.HasManySetAssociationsMixin<Order, OrderId>;
-  addOrder!: Sequelize.HasManyAddAssociationMixin<Order, OrderId>;
-  addOrders!: Sequelize.HasManyAddAssociationsMixin<Order, OrderId>;
-  createOrder!: Sequelize.HasManyCreateAssociationMixin<Order>;
-  removeOrder!: Sequelize.HasManyRemoveAssociationMixin<Order, OrderId>;
-  removeOrders!: Sequelize.HasManyRemoveAssociationsMixin<Order, OrderId>;
-  hasOrder!: Sequelize.HasManyHasAssociationMixin<Order, OrderId>;
-  hasOrders!: Sequelize.HasManyHasAssociationsMixin<Order, OrderId>;
-  countOrders!: Sequelize.HasManyCountAssociationsMixin;
 }
 
 User.init({

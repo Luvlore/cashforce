@@ -1,8 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
-import type { Cnpj, CnpjId } from './Cnpj';
-import type { Order, OrderId } from './Order';
 
 export interface BuyerAttributes {
   id: number;
@@ -63,23 +61,6 @@ export class Buyer extends Model<BuyerAttributes, BuyerCreationAttributes> imple
   cnpjId?: number;
   confirm?: number;
   email?: string;
-
-  orders!: Order[];
-  getOrders!: Sequelize.HasManyGetAssociationsMixin<Order>;
-  setOrders!: Sequelize.HasManySetAssociationsMixin<Order, OrderId>;
-  addOrder!: Sequelize.HasManyAddAssociationMixin<Order, OrderId>;
-  addOrders!: Sequelize.HasManyAddAssociationsMixin<Order, OrderId>;
-  createOrder!: Sequelize.HasManyCreateAssociationMixin<Order>;
-  removeOrder!: Sequelize.HasManyRemoveAssociationMixin<Order, OrderId>;
-  removeOrders!: Sequelize.HasManyRemoveAssociationsMixin<Order, OrderId>;
-  hasOrder!: Sequelize.HasManyHasAssociationMixin<Order, OrderId>;
-  hasOrders!: Sequelize.HasManyHasAssociationsMixin<Order, OrderId>;
-  countOrders!: Sequelize.HasManyCountAssociationsMixin;
-  
-  cnpj!: Cnpj;
-  getCnpj!: Sequelize.BelongsToGetAssociationMixin<Cnpj>;
-  setCnpj!: Sequelize.BelongsToSetAssociationMixin<Cnpj, CnpjId>;
-  createCnpj!: Sequelize.BelongsToCreateAssociationMixin<Cnpj>;
 }
 
 Buyer.init({

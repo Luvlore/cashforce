@@ -12,14 +12,14 @@
         </tr>
       </thead>
 
-      <tbody class="tbody" v-for="item in invoices" v-bind:key="item.id">
+      <tbody class="tbody" v-for="item in orders" v-bind:key="item.nNf">
         <tr>
-          <td>{{ item.id }}</td>
-          <td>sacado {{ formatId(item.accountId) }}</td>
-          <td>cedente {{ formatId(item.recipientId) }}</td>
-          <td>{{ formatDate(item.date) }}</td>
+          <td>{{ item.nNf }}</td>
+          <td>{{ item.buyers.name}}</td>
+          <td>{{ item.providers.name }}</td>
+          <td>{{ formatDate(item.emissionDate) }}</td>
           <td class="accent">{{ formatValue(item.value) }}</td>
-          <td class="accent status">{{ statusCode[item.status] }}</td>
+          <td class="accent status">{{ statusCode[item.orderStatusBuyer] }}</td>
           <td>
             <button>
               Dados do cedente
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+  import api from '@/services/api';
+
   export default {
     data: () => ({
       statusCode: [
@@ -45,30 +47,18 @@
         'Recebida e confirmada',
         'Pagamento Autorizado'
       ],
-      invoices: [
-        {
-          id: 1234,
-          accountId: 1,
-          recipientId: 2,
-          date: new Date('12/02/2020'),
-          value: 49725,
-          status: 7
-        },
-        {
-          id: 1234,
-          accountId: 1,
-          recipientId: 2,
-          date: new Date('12/02/2020'),
-          value: 49725,
-          status: 6
-        },
-      ]
+      orders: [],
     }),
+    mounted() {
+      api.get('/orders').then(({ data }) => this.orders = data);
+    },
     methods: {
-      formatDate: (date) => new Date(date).toLocaleDateString(),
-      formatValue: (value) => Number(value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
-      formatId: (id) => String(id).padStart(3, '0')
-    }
+      formatDate: (emissionDate) => new Date(emissionDate).toLocaleDateString(),
+      formatValue: (value) => Number(value).toLocaleString('pt-br', {
+        style: 'currency',
+        currency: 'BRL' 
+      }),
+    },
   }
 </script>
 

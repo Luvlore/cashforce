@@ -1,8 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
-import type { Order, OrderId } from './Order';
-import type { Sponsor, SponsorId } from './Sponsor';
 
 export interface OfferAttributes {
   id: number;
@@ -39,16 +37,6 @@ export class Offer extends Model<OfferAttributes, OfferCreationAttributes> imple
   updatedAt!: Date;
   orderId?: number;
   sponsorId?: number;
-
-  order!: Order;
-  getOrder!: Sequelize.BelongsToGetAssociationMixin<Order>;
-  setOrder!: Sequelize.BelongsToSetAssociationMixin<Order, OrderId>;
-  createOrder!: Sequelize.BelongsToCreateAssociationMixin<Order>;
-
-  sponsor!: Sponsor;
-  getSponsor!: Sequelize.BelongsToGetAssociationMixin<Sponsor>;
-  setSponsor!: Sequelize.BelongsToSetAssociationMixin<Sponsor, SponsorId>;
-  createSponsor!: Sequelize.BelongsToCreateAssociationMixin<Sponsor>;
 }
 
 Offer.init({

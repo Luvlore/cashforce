@@ -1,6 +1,7 @@
 <template>
   <section class="section-content">
     <div class="bar" />
+
     <div class="content">
       <div class="head">
         <div class="title">
@@ -9,7 +10,7 @@
         </div>
         <p>Visualize as notas fiscais que você tem.</p>
       </div>
-      
+
       <TableInvoice />
     </div>
   </section>

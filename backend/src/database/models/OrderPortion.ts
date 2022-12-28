@@ -1,7 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
-import type { Order, OrderId } from './Order';
 
 export interface OrderPortionAttributes {
   id: number;
@@ -28,11 +27,6 @@ export class OrderPortion extends Model<OrderPortionAttributes, OrderPortionCrea
   createdAt!: Date;
   updatedAt!: Date;
   orderId?: number;
-
-  order!: Order;
-  getOrder!: Sequelize.BelongsToGetAssociationMixin<Order>;
-  setOrder!: Sequelize.BelongsToSetAssociationMixin<Order, OrderId>;
-  createOrder!: Sequelize.BelongsToCreateAssociationMixin<Order>;
 }
 
 OrderPortion.init({

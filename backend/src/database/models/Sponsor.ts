@@ -1,8 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
-import type { Cnpj, CnpjId } from './Cnpj';
-import type { Offer, OfferId } from './Offer';
 
 export interface SponsorAttributes {
   id: number;
@@ -67,23 +65,6 @@ export class Sponsor extends Model<SponsorAttributes, SponsorCreationAttributes>
   updatedAt!: Date;
   cnpjId?: number;
   email?: string;
-
-  cnpj!: Cnpj;
-  getCnpj!: Sequelize.BelongsToGetAssociationMixin<Cnpj>;
-  setCnpj!: Sequelize.BelongsToSetAssociationMixin<Cnpj, CnpjId>;
-  createCnpj!: Sequelize.BelongsToCreateAssociationMixin<Cnpj>;
-
-  offers!: Offer[];
-  getOffers!: Sequelize.HasManyGetAssociationsMixin<Offer>;
-  setOffers!: Sequelize.HasManySetAssociationsMixin<Offer, OfferId>;
-  addOffer!: Sequelize.HasManyAddAssociationMixin<Offer, OfferId>;
-  addOffers!: Sequelize.HasManyAddAssociationsMixin<Offer, OfferId>;
-  createOffer!: Sequelize.HasManyCreateAssociationMixin<Offer>;
-  removeOffer!: Sequelize.HasManyRemoveAssociationMixin<Offer, OfferId>;
-  removeOffers!: Sequelize.HasManyRemoveAssociationsMixin<Offer, OfferId>;
-  hasOffer!: Sequelize.HasManyHasAssociationMixin<Offer, OfferId>;
-  hasOffers!: Sequelize.HasManyHasAssociationsMixin<Offer, OfferId>;
-  countOffers!: Sequelize.HasManyCountAssociationsMixin;
 }
 
 Sponsor.init({

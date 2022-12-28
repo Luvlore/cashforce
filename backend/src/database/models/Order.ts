@@ -1,12 +1,10 @@
 import * as Sequelize from 'sequelize';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelizeConnection from '../config';
-import type { Buyer, BuyerId } from './Buyer';
-import type { Cnpj, CnpjId } from './Cnpj';
-import type { Offer, OfferId } from './Offer';
-import type { OrderPortion, OrderPortionId } from './OrderPortion';
-import type { Provider, ProviderId } from './Provider';
-import type { User, UserId } from './User';
+import { Buyer } from './Buyer';
+import { Cnpj } from './Cnpj';
+import { Provider } from './Provider';
+import { User } from './User';
 
 export interface OrderAttributes {
   id: number;
@@ -63,51 +61,6 @@ export class Order extends Model<OrderAttributes, OrderCreationAttributes> imple
   deliveryReceipt?: string;
   cargoPackingList?: string;
   deliveryCtrc?: string;
-
-  buyer!: Buyer;
-  getBuyer!: Sequelize.BelongsToGetAssociationMixin<Buyer>;
-  setBuyer!: Sequelize.BelongsToSetAssociationMixin<Buyer, BuyerId>;
-  createBuyer!: Sequelize.BelongsToCreateAssociationMixin<Buyer>;
-
-  cnpj!: Cnpj;
-  getCnpj!: Sequelize.BelongsToGetAssociationMixin<Cnpj>;
-  setCnpj!: Sequelize.BelongsToSetAssociationMixin<Cnpj, CnpjId>;
-  createCnpj!: Sequelize.BelongsToCreateAssociationMixin<Cnpj>;
-
-  offers!: Offer[];
-  getOffers!: Sequelize.HasManyGetAssociationsMixin<Offer>;
-  setOffers!: Sequelize.HasManySetAssociationsMixin<Offer, OfferId>;
-  addOffer!: Sequelize.HasManyAddAssociationMixin<Offer, OfferId>;
-  addOffers!: Sequelize.HasManyAddAssociationsMixin<Offer, OfferId>;
-  createOffer!: Sequelize.HasManyCreateAssociationMixin<Offer>;
-  removeOffer!: Sequelize.HasManyRemoveAssociationMixin<Offer, OfferId>;
-  removeOffers!: Sequelize.HasManyRemoveAssociationsMixin<Offer, OfferId>;
-  hasOffer!: Sequelize.HasManyHasAssociationMixin<Offer, OfferId>;
-  hasOffers!: Sequelize.HasManyHasAssociationsMixin<Offer, OfferId>;
-  countOffers!: Sequelize.HasManyCountAssociationsMixin;
-
-  orderportions!: OrderPortion[];
-  getOrderportions!: Sequelize.HasManyGetAssociationsMixin<OrderPortion>;
-  setOrderportions!: Sequelize.HasManySetAssociationsMixin<OrderPortion, OrderPortionId>;
-  addOrderportion!: Sequelize.HasManyAddAssociationMixin<OrderPortion, OrderPortionId>;
-  addOrderportions!: Sequelize.HasManyAddAssociationsMixin<OrderPortion, OrderPortionId>;
-  createOrderportion!: Sequelize.HasManyCreateAssociationMixin<OrderPortion>;
-  removeOrderportion!: Sequelize.HasManyRemoveAssociationMixin<OrderPortion, OrderPortionId>;
-  removeOrderportions!: Sequelize.HasManyRemoveAssociationsMixin<OrderPortion, OrderPortionId>;
-  hasOrderportion!: Sequelize.HasManyHasAssociationMixin<OrderPortion, OrderPortionId>;
-  hasOrderportions!: Sequelize.HasManyHasAssociationsMixin<OrderPortion, OrderPortionId>;
-  countOrderportions!: Sequelize.HasManyCountAssociationsMixin;
-
-  provider!: Provider;
-  getProvider!: Sequelize.BelongsToGetAssociationMixin<Provider>;
-  setProvider!: Sequelize.BelongsToSetAssociationMixin<Provider, ProviderId>;
-  createProvider!: Sequelize.BelongsToCreateAssociationMixin<Provider>;
-  
-  user!: User;
-  getUser!: Sequelize.BelongsToGetAssociationMixin<User>;
-  setUser!: Sequelize.BelongsToSetAssociationMixin<User, UserId>;
-  createUser!: Sequelize.BelongsToCreateAssociationMixin<User>;
-
 }
   
 Order.init({
@@ -301,4 +254,28 @@ Order.init({
       ]
     },
   ]
+});
+
+Order.hasOne(Buyer, {
+  foreignKey: 'id',
+  sourceKey: 'buyerId',
+  as: 'buyers'
+});
+
+Order.hasOne(User, {
+  foreignKey: 'id',
+  sourceKey: 'userId',
+  as: 'users'
+});
+
+Order.hasOne(Provider, {
+  foreignKey: 'id',
+  sourceKey: 'providerId',
+  as: 'providers'
+});
+
+Order.hasOne(Cnpj, {
+  foreignKey: 'id',
+  sourceKey: 'cnpjId',
+  as: 'cnpjs'
 });
