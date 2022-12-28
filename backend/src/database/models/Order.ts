@@ -4,7 +4,6 @@ import sequelizeConnection from '../config';
 import { Buyer } from './Buyer';
 import { Cnpj } from './Cnpj';
 import { Provider } from './Provider';
-import { User } from './User';
 
 export interface OrderAttributes {
   id: number;
@@ -262,20 +261,14 @@ Order.hasOne(Buyer, {
   as: 'buyers'
 });
 
-Order.hasOne(User, {
-  foreignKey: 'id',
-  sourceKey: 'userId',
-  as: 'users'
-});
-
 Order.hasOne(Provider, {
   foreignKey: 'id',
   sourceKey: 'providerId',
   as: 'providers'
 });
 
-Order.hasOne(Cnpj, {
+Provider.hasOne(Cnpj, {
   foreignKey: 'id',
   sourceKey: 'cnpjId',
-  as: 'cnpjs'
+  as: 'cnpjs',
 });

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Buyer } from '../database/models/Buyer';
+import { Cnpj } from '../database/models/Cnpj';
 import { Order } from '../database/models/Order';
 import { Provider } from '../database/models/Provider';
 
@@ -16,7 +17,32 @@ const OrderController = {
         { 
           model: Provider, 
           as: 'providers', 
-          attributes: ['name', 'tradingName'],
+          attributes: [
+            'name',
+            'tradingName',
+            'responsibleName',
+            'responsiblePosition',
+            'responsiblePhone',
+            'responsibleMobile',
+            'website',
+            'postalCode',
+            'address',
+            'number',
+            'complement',
+            'neighborhood',
+            'city',
+            'state',
+            'bank',
+            'bankAgency',
+            'account',
+            'email'
+          ],
+          include: [
+            {
+              model: Cnpj,
+              as: 'cnpjs',
+              attributes: ['cnpj']
+            }]
         },
       ]
     });
