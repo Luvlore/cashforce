@@ -5,7 +5,7 @@
     <div class="content">
       <div class="head">
         <div class="title">
-          <img src="../images/icon-invoice.png" />
+          <img src="../assets/icon-invoice.png" />
           <h1>Notas fiscais</h1>
         </div>
         <p>Visualize as notas fiscais que você tem.</p>

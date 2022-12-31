@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <img src="https://cashforce.com.br/wp-content/themes/cashforce/assets/images/logo-cashforce.svg" alt="cashforce-logo"/>
+    <img src="../assets/logo-cashforce.svg" alt="cashforce-logo"/>
     <nav class="menu" v-for="(item, index) in menuItems" v-bind:key="index">
       <div class="menu-item" v-on:click="selectItem" v-bind:class="[ index == 0 ? 'selected' : '' ]">
         <img v-bind:src="item.icon" v-bind:alt="item.alt" />
@@ -18,7 +18,7 @@
     data: () => ({
       menuItems: [
         {
-          icon: require('../images/icon-invoice.png'),
+          icon: require('../assets/icon-invoice.png'),
           alt: 'icon-invoice',
           title: 'Notas fiscais'
         },
