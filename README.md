@@ -6,11 +6,11 @@ Projeto End-to-End desenvolvido para o processo seletivo da Cashforce.
 
 ---
 
-- **Frontend:** VueJS;
-- **Backend:** NodeJS, express, Sequelize e TypeScript;
-- **Banco de Dados:** SQL, MySQL;
-- **Containerização:** Docker;
-- **IDE:** Visual Studio Code
+- **Frontend:** VueJS.
+- **Backend:** NodeJS, express, Sequelize e TypeScript.
+- **Banco de Dados:** SQL, MySQL.
+- **Containerização:** Docker.
+- **IDE:** Visual Studio Code.
 
 ## :hammer: Configurações Iniciais
 
@@ -30,7 +30,7 @@ Projeto End-to-End desenvolvido para o processo seletivo da Cashforce.
 
   - Ele te dará acesso ao terminal interativo do container criado pelo compose, que está rodando em segundo plano.
 
-  > Instale as dependências **[Caso existam]** com yarn install
+  > Instale as dependências **[Caso existam]** com `yarn install`
 
   :warning: **Atenção:** :warning: Caso opte por utilizar o Docker, TODOS os comandos disponíveis no `package.json` (npm start, npm test, npm run dev, ...) devem ser executados DENTRO do container, ou seja, no terminal que aparece após a execução do comando `docker exec` citado acima.
 </details>
