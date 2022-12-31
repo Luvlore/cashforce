@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+  frontend:
+    image: node:16.18
+    platform: linux/x86_64
+    container_name: cashforce_frontend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    working_dir: /app/frontend
+    volumes:
+      - ./frontend:/app/frontend
+    tty: true
+    stdin_open: true
+    command: bash
+    restart: always
+    depends_on:
+      - backend
+    networks:
+      - virtual_wan_Front-to-Back
+
+  backend:
+    image: node:16.18
+    platform: linux/x86_64
+    container_name: cashforce_backend
+    build: ./backend
+    working_dir: /app/backend
+    volumes:
+      - ./backend:/app/backend
+    tty: true
+    stdin_open: true
+    command: bash
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 3001:3001
+    environment:
+      MYSQL_USER: 'alice'
+      MYSQL_PASSWORD: 'wonderland'
+      HOSTNAME: 'db'
+      PORT: 3001
+    networks:
+      - virtual_wan_Front-to-Back
+      - virtual_lan_Back-to-DB
+
+  db:
+    image: mysql:5.7
+    platform: linux/x86_64
+    restart: always
+    container_name: cashforce_db
+    environment:
+      MYSQL_DATABASE: 'cashforce_v3'
+      MYSQL_USER: 'alice'
+      MYSQL_PASSWORD: 'wonderland'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - virtual_lan_Back-to-DB
+    cap_add:
+      - SYS_NICE
+volumes:
+  my-db:
+
+
+networks:
+  virtual_wan_Front-to-Back: {}
+  virtual_lan_Back-to-DB: {}
